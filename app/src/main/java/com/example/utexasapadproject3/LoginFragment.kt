@@ -13,6 +13,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.activity_main.*
 import android.R.string
+import android.os.Handler
+import android.os.Looper
+import com.google.gson.Gson
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -31,14 +34,36 @@ class LoginFragment : Fragment(), HttpUtils, FragmentUtils {
         loginButton.setOnClickListener({
             val userTextField = view.findViewById<TextView>(R.id.lf_username)
             val passTextField = view.findViewById<TextView>(R.id.lf_password)
-            userTextField.text = ""
-            passTextField.text = ""
 
-            Toast.makeText(this.context, "Login Successful", Toast.LENGTH_SHORT).show()
-            navigateTo(DashboardFragment(), fragmentManager)
+            val loginRequest = LoginInfo(
+                username = userTextField.text.toString(),
+                password = passTextField.text.toString()
+            )
+            val json = Gson().toJson(loginRequest)
+            doPostRequest("/api/users/login", json, ::handleLogin)
         })
 
         return view
     }
 
+    fun handleLogin(json: JSONObject) {
+        val handler = Handler(Looper.getMainLooper());
+
+        println("THE JSON " + json)
+        if (json["msg"] == "User logged in successfully") {
+            handler.post({
+                Toast.makeText(this.context, "Login Successful", Toast.LENGTH_SHORT).show()
+                navigateTo(DashboardFragment(), fragmentManager)
+            })
+        } else {
+            handler.post({
+                Toast.makeText(this.context, "Login Failed", Toast.LENGTH_SHORT).show()
+            })
+        }
+    }
+
+    private data class LoginInfo(
+        val username: String,
+        val password: String
+    )
 }
