@@ -1,10 +1,16 @@
 <resources>
 
-    <style name="EventsATX" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.EventsATX" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@android:color/holo_blue_dark</item>
         <item name="colorPrimaryDark">@android:color/holo_blue_light</item>
         <item name="colorAccent">@android:color/darker_gray</item>
+    </style>
+
+    <style name="Widget.EventsATX.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">?attr/colorAccent</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
 </resources>

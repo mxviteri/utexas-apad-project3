@@ -20,7 +20,7 @@ class DashboardFragment : Fragment(), HttpUtils {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        dataView = view.findViewById(R.id.dashboard_text)
+        //dataView = view.findViewById(R.id.dashboard_text)
 
         doGetRequest("/api/events", ::handleEvents)
         return view
