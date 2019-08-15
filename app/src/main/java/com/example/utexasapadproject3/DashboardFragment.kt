@@ -26,7 +26,7 @@ class DashboardFragment : Fragment(), HttpUtils {
         return view
     }
 
-    fun handleEvents(json: JSONObject) {
+    fun handleEvents(json: JSONObject, code: Int) {
         val handler = Handler(Looper.getMainLooper());
         handler.post({
             dataView?.text = json.toString()

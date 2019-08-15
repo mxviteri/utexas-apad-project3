@@ -10,7 +10,7 @@ interface HttpUtils {
         get() = "https://my-project-1530049714771.appspot.com"
 
     @Throws(IOException::class)
-    fun doGetRequest(path: String, callback: (json: JSONObject) -> Unit) {
+    fun doGetRequest(path: String, callback: (json: JSONObject, code: Int) -> Unit) {
         val baseUrl = baseUrl
 
         val request = Request.Builder()
@@ -33,13 +33,13 @@ interface HttpUtils {
 
                     val res = response.body()?.string()
                     var json = JSONObject(res)
-                    callback(json)
+                    callback(json, response.code())
                 }
             })
     }
 
     @Throws(IOException::class)
-    fun doPostRequest(path: String, json: String, callback: (json: JSONObject) -> Unit) {
+    fun doPostRequest(path: String, json: String, callback: (json: JSONObject, code: Int) -> Unit) {
         val baseUrl = baseUrl
 
         val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json)
@@ -64,7 +64,7 @@ interface HttpUtils {
 
                     val res = response.body()?.string()
                     var json = JSONObject(res)
-                    callback(json)
+                    callback(json, response.code())
                 }
             })
     }

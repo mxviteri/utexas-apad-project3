@@ -39,13 +39,13 @@ class LoginFragment : Fragment(), HttpUtils, FragmentUtils {
         return view
     }
 
-    fun handleLogin(json: JSONObject) {
+    fun handleLogin(json: JSONObject, code: Int) {
         val handler = Handler(Looper.getMainLooper());
 
-        println("THE JSON " + json)
-        if (json["msg"] == "User logged in successfully") {
+        if (code == 200) {
             handler.post({
                 Toast.makeText(this.context, "Login Successful", Toast.LENGTH_SHORT).show()
+                Global.setUser(json["user"].toString())
                 navigateTo(DashboardFragment(), fragmentManager)
             })
         } else {
