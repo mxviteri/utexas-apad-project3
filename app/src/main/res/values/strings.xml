@@ -3,6 +3,10 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="createAccount_1">Don\'t have an account?</string>
+    <string name="createAccount_2">Create one here</string>
+    <string name="createAccount_title">Create Account</string>
+    <string name="createAccount_subtitle">You only need a username and password</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

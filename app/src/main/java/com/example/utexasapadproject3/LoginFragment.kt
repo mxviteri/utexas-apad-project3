@@ -36,23 +36,26 @@ class LoginFragment : Fragment(), HttpUtils, FragmentUtils {
             doPostRequest("/api/users/login", json, ::handleLogin)
         })
 
+        val createAccountLink = view.findViewById<View>(R.id.text_create_account)
+        createAccountLink.setOnClickListener({
+            navigateTo(CreateAccountFragment(), fragmentManager)
+        })
+
         return view
     }
 
     fun handleLogin(json: JSONObject, code: Int) {
         val handler = Handler(Looper.getMainLooper());
 
-        if (code == 200) {
-            handler.post({
+        handler.post({
+            if (code == 200) {
                 Toast.makeText(this.context, "Login Successful", Toast.LENGTH_SHORT).show()
                 Global.setUser(json["user"].toString())
                 navigateTo(DashboardFragment(), fragmentManager)
-            })
-        } else {
-            handler.post({
+            } else {
                 Toast.makeText(this.context, "Login Failed", Toast.LENGTH_SHORT).show()
-            })
-        }
+            }
+        })
     }
 
     private data class LoginInfo(
