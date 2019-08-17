@@ -9,6 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import kotlinx.android.synthetic.main.fragment_dashboard.view.*
+import org.json.JSONArray
 import org.json.JSONObject
 
 class DashboardFragment : Fragment(), HttpUtils {
@@ -23,13 +29,21 @@ class DashboardFragment : Fragment(), HttpUtils {
         //dataView = view.findViewById(R.id.dashboard_text)
 
         doGetRequest("/api/events", ::handleEvents)
+
         return view
     }
 
     fun handleEvents(json: JSONObject, code: Int) {
         val handler = Handler(Looper.getMainLooper());
         handler.post({
-            dataView?.text = json.toString()
+            val jsonStr:String = json["data"].toString()
+            val gson = GsonBuilder().create()
+            val eventList = gson.fromJson(jsonStr,Array<Event>::class.java).toList()
+
+            view?.recycler_view?.setHasFixedSize(true)
+            view?.recycler_view?.layoutManager = GridLayoutManager(context, 1, RecyclerView.VERTICAL, false)
+            val adapter = EventCardRecyclerViewAdapter(eventList)
+            view?.recycler_view?.adapter = adapter
         })
     }
 }
