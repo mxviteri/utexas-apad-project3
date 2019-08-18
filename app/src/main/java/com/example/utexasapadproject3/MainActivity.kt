@@ -1,13 +1,11 @@
 package com.example.utexasapadproject3
 
-import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import java.util.*
 import android.view.MenuItem
-import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity(), FragmentUtils {
@@ -29,6 +27,11 @@ class MainActivity : AppCompatActivity(), FragmentUtils {
         when (item.getItemId()) {
             R.id.my_events -> {
                 navigateTo(MyEventsFragment(), supportFragmentManager)
+                return true
+            }
+            R.id.logout -> {
+                Global.setUser({}.toString())
+                navigateTo(LoginFragment(), supportFragmentManager)
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

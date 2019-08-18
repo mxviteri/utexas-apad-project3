@@ -11,4 +11,10 @@
             android:id="@+id/my_events"
             android:title="My Events"
             app:showAsAction="never" />
+
+    <item
+            android:id="@+id/logout"
+            android:title="Log Out"
+            app:showAsAction="never" />
+
 </menu>
