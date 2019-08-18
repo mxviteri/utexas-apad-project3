@@ -33,8 +33,8 @@ class EventDetailsFragment : Fragment(), HttpUtils, FragmentUtils {
         val bundle = this.arguments
         val eventId = bundle?.getString("eventId")
 
-        val joinEventButton = view.findViewById<Button>(R.id.join_event_button)
-        val leaveEventButton = view.findViewById<Button>(R.id.leave_event_button)
+        val joinEventButton = view.findViewById<View>(R.id.join_event_button)
+        val leaveEventButton = view.findViewById<View>(R.id.leave_event_button)
 
         joinEventButton.setOnClickListener({
             val currentUser = JSONObject(Global.getUser())
@@ -144,7 +144,7 @@ class EventDetailsFragment : Fragment(), HttpUtils, FragmentUtils {
                 val fragment = EventDetailsFragment()
                 fragment.setArguments(bundle)
                 // reload fragments
-                navigateNoHistory(fragment, fragmentManager)
+                reload(this, fragmentManager)
             }
             else {
                 Toast.makeText(this.context, json["warning"].toString(), Toast.LENGTH_SHORT).show()

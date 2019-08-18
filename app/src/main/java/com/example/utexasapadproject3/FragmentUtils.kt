@@ -18,12 +18,13 @@ interface FragmentUtils {
         }
     }
 
-    fun navigateNoHistory(fragment: Fragment, fragmentManager: FragmentManager?) {
-
+    fun reload(fragment: Fragment, fragmentManager: FragmentManager?) {
+        // send in "this" as the fragment argument
         if (fragmentManager != null) {
             fragmentManager
                 .beginTransaction()
-                .replace(R.id.container, fragment)
+                .detach(fragment)
+                .attach(fragment)
                 .commit()
         }
     }
