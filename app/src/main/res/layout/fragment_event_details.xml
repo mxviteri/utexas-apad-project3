@@ -76,5 +76,36 @@
             app:layout_constraintTop_toBottomOf="@+id/ed_users_title" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="20dp" android:layout_marginStart="20dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:layout_marginTop="8dp"/>
+    <View
+            android:id="@+id/divider4"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/ed_users" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="20dp" android:layout_marginStart="20dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="20dp" android:layout_marginEnd="20dp"/>
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/join_event_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="Join Event"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/divider4"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp" app:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone"/>
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/leave_event_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="Leave Event"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/divider4"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp" app:layout_constraintStart_toStartOf="parent"
+            android:visibility="visible" android:theme="@style/AdverseEffectButton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

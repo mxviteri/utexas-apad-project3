@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -26,6 +28,9 @@ class EventDetailsFragment : Fragment(), HttpUtils {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_event_details, container, false)
+
+        val joinEventButton = view.findViewById<Button>(R.id.join_event_button)
+        val leaveEventButton = view.findViewById<Button>(R.id.leave_event_button)
 
         val bundle = this.arguments
         val eventId = bundle?.getString("eventId")
@@ -77,6 +82,26 @@ class EventDetailsFragment : Fragment(), HttpUtils {
 
                 for (i in 0 until particpants.length()) {
                     users?.append(particpants[i].toString() + "\n")
+                }
+
+                // handle buttons
+                val joinEventButton = view?.findViewById<Button>(R.id.join_event_button)
+                val leaveEventButton = view?.findViewById<Button>(R.id.leave_event_button)
+                joinEventButton?.visibility = View.GONE
+                leaveEventButton?.visibility = View.GONE
+
+                val currentUser = JSONObject(Global.getUser())
+                val username = currentUser["username"].toString()
+
+                var foundUser = false
+                for (i in 0 until particpants.length()) {
+                    if (particpants[i].toString() == username) foundUser = true
+                }
+
+                if (foundUser) {
+                    leaveEventButton?.visibility = View.VISIBLE
+                } else {
+                    joinEventButton?.visibility = View.VISIBLE
                 }
             }
         })

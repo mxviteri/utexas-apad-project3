@@ -13,4 +13,8 @@
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
+    <style name="AdverseEffectButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorPrimary">@color/adverseAction</item>
+    </style>
+
 </resources>
