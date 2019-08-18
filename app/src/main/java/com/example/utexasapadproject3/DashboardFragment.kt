@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.*
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,7 +14,6 @@ import kotlinx.android.synthetic.main.fragment_dashboard.view.*
 import org.json.JSONObject
 
 class DashboardFragment : Fragment(), HttpUtils {
-    private var dataView: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +26,6 @@ class DashboardFragment : Fragment(), HttpUtils {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        //dataView = view.findViewById(R.id.dashboard_text)
 
         doGetRequest("/api/events", ::handleEvents)
 
