@@ -18,5 +18,14 @@ interface FragmentUtils {
         }
     }
 
+    fun navigateNoHistory(fragment: Fragment, fragmentManager: FragmentManager?) {
+
+        if (fragmentManager != null) {
+            fragmentManager
+                .beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit()
+        }
+    }
 
 }

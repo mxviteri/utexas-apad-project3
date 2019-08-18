@@ -1,6 +1,7 @@
 package com.example.utexasapadproject3
 
 import android.widget.TextView
+import android.widget.Toast
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -59,6 +60,7 @@ interface HttpUtils {
                 override fun onResponse(call: Call, response: Response) {
                     val headerList = response.headers()
                     if (headerList["content-type"] == "text/html") {
+                        println("NETWORK ERROR")
                         return
                     }
 
