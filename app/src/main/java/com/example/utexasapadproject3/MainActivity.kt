@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import java.util.*
+import android.view.MenuItem
+import android.widget.Toast
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(), FragmentUtils {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +21,17 @@ class MainActivity : AppCompatActivity() {
                 .beginTransaction()
                 .add(R.id.container, LoginFragment())
                 .commit()
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        when (item.getItemId()) {
+            R.id.my_events -> {
+                navigateTo(MyEventsFragment(), supportFragmentManager)
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
         }
     }
 }

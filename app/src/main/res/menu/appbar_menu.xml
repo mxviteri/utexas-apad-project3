@@ -6,13 +6,9 @@
             android:icon="@drawable/search_icon"
             android:title="Search"
             app:showAsAction="always" />
+
     <item
-            android:id="@+id/menu"
-            android:icon="@drawable/menu_icon"
-            android:title="Menu"
-            app:showAsAction="always" >
-
-    </item>
-    
-
+            android:id="@+id/my_events"
+            android:title="My Events"
+            app:showAsAction="never" />
 </menu>
