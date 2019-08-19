@@ -80,10 +80,10 @@ class EventDetailsFragment : Fragment(), HttpUtils, FragmentUtils {
                 eventCapacity?.text = event.getString("capacity") + " spots"
 
                 val eventDate = view?.findViewById<TextView>(R.id.ed_datetime)
-                val date = event.getString("datetime")
-                val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-                simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
-                eventDate?.text = simpleDateFormat.parse(date).toString()
+                val datetimeParser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                val datetimeFormatter = SimpleDateFormat("MMMM dd, yyyy | h:mm a")
+                val datetime = datetimeFormatter.format(datetimeParser.parse(event.getString("datetime"))!!)
+                eventDate?.text = datetime
 
                 val eventDescription = view?.findViewById<TextView>(R.id.ed_description)
                 eventDescription?.text = event.getString("description")
