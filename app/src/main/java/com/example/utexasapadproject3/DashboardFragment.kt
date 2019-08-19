@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.*
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -53,13 +53,18 @@ class DashboardFragment : Fragment(), HttpUtils, FragmentUtils {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
         inflater.inflate(R.menu.appbar_menu, menu)
-        val searchView = SearchView((context as MainActivity).supportActionBar?.themedContext ?: context)
-        menu.findItem(R.id.search).apply {
-            setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW or MenuItem.SHOW_AS_ACTION_IF_ROOM)
-            actionView = searchView
-        }
+
+
+        val searchItem = menu.findItem(R.id.search)
+        val searchView = searchItem.actionView as SearchView
+        searchView.setQueryHint("Search Events")
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+
             override fun onQueryTextSubmit(query: String): Boolean {
                 val fragment = SearchResultFragment()
                 val bundle = Bundle()
@@ -70,11 +75,6 @@ class DashboardFragment : Fragment(), HttpUtils, FragmentUtils {
                 return false
             }
 
-            override fun onQueryTextChange(newText: String): Boolean {
-                return false
-            }
         })
-
-        searchView.setOnClickListener {view ->  }
     }
 }
