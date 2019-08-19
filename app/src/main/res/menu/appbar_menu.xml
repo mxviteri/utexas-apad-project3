@@ -8,8 +8,8 @@
           app:showAsAction="collapseActionView|always"
           app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 
-    <item android:id="@+id/add_event"
-          android:title="Add Event"
+    <item android:id="@+id/create_event"
+          android:title="Create Event"
           android:icon="@drawable/ic_add"
           app:showAsAction="ifRoom"/>
 
