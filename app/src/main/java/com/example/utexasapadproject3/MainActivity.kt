@@ -1,5 +1,8 @@
 package com.example.utexasapadproject3
 
+import android.annotation.TargetApi
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +22,7 @@ class MainActivity : AppCompatActivity(), FragmentUtils {
         }
     }
 
+    @TargetApi(16)
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
         when (item.getItemId()) {
@@ -28,7 +32,10 @@ class MainActivity : AppCompatActivity(), FragmentUtils {
             }
             R.id.logout -> {
                 Global.setUser({}.toString())
-                navigateTo(LoginFragment(), supportFragmentManager)
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+
+                this.startActivity(intent)
                 return true
             }
             R.id.create_event -> {
