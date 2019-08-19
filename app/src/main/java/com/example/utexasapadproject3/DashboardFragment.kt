@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.*
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,7 +14,7 @@ import kotlinx.android.synthetic.main.appbar.view.*
 import kotlinx.android.synthetic.main.fragment_dashboard.view.*
 import org.json.JSONObject
 
-class DashboardFragment : Fragment(), HttpUtils {
+class DashboardFragment : Fragment(), HttpUtils, FragmentUtils {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +49,32 @@ class DashboardFragment : Fragment(), HttpUtils {
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.appbar_menu, menu)
-        super.onCreateOptionsMenu(menu, menuInflater)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.appbar_menu, menu)
+        val searchView = SearchView((context as MainActivity).supportActionBar?.themedContext ?: context)
+        menu.findItem(R.id.search).apply {
+            setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW or MenuItem.SHOW_AS_ACTION_IF_ROOM)
+            actionView = searchView
+        }
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                val fragment = SearchResultFragment()
+                val bundle = Bundle()
+                bundle.putString("searchQuery", query)
+                fragment.setArguments(bundle)
+
+                navigateTo(fragment, fragmentManager)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
+
+        searchView.setOnClickListener {view ->  }
     }
 }
